@@ -56,14 +56,15 @@ body {
 }
 
 .correct-option {
-    background-color: green;
-    color: white;
+    background-color: #B0D9B1;
+    color: black;
 }
 
 .incorrect-option {
-    background-color: red;
-    color: white;
+    background-color: #EF6262;
+    color: black;
 }
+
 
 #submit {
     background-color: #007bff;

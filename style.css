@@ -1,0 +1,79 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.quiz-container {
+    text-align: center;
+    padding: 20px;
+    background-color: #f9f9f9;
+}
+
+.question {
+    margin: 20px 0;
+    padding: 20px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #fff;
+    overflow: auto;
+}
+
+/* Rest of your CSS styles... */
+
+
+.options label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.options label:hover {
+    background-color: #f0f0f0;
+}
+
+.feedback {
+    margin-top: 10px;
+    font-weight: bold;
+    color: #000;
+    background-color: transparent;
+}
+
+.correct-feedback {
+    color: green;
+}
+
+.incorrect-feedback {
+    color: red;
+}
+
+.correct-option {
+    background-color: green;
+    color: white;
+}
+
+.incorrect-option {
+    background-color: red;
+    color: white;
+}
+
+#submit {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#submit:hover {
+    background-color: #0056b3;
+}

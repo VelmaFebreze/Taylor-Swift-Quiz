@@ -1,43 +1,49 @@
-$(document).ready(function () {
-    // Disable the submit button initially
-    $('#submit').prop('disabled', true);
-
-    $('input[type="radio"]').click(function () {
-        // Enable the submit button
-        $('#submit').prop('disabled', false);
-
-        // Determine if the selected answer is correct
-        var isCorrect = $(this).val() === 'correct';
-
-        // Remove background colors from all options in the same question
-        var $options = $(this).closest('.question').find('.options label');
-        $options.removeClass('correct-option incorrect-option');
-
-        // Highlight the correct options green and all others red
-        $options.filter('input[value="correct"]').addClass('correct-option');
-        $options.filter(':not(:has(input[value="correct"]))').addClass('incorrect-option');
-
-        // Set feedback based on correctness
-        var feedback = isCorrect ? 'Right!' : 'Wrong.';
-        var feedbackClass = isCorrect ? 'correct-feedback' : 'incorrect-feedback';
-
-        $(this).closest('.question').find('.feedback').text(feedback).addClass(feedbackClass);
+$(document).ready(function() {
+    // Function to reset the quiz to its initial state
+    function resetQuiz() {
+      $('input[type="radio"]').prop('disabled', false); // Re-enable radio buttons
+      $('.options label').removeClass('correct-option incorrect-option'); // Reset styling
+      $('.feedback').empty(); // Clear feedback
+      $('#submit').prop('disabled', false); // Re-enable the submit button
+    }
+  
+    // Event handler for when an answer option is clicked
+    $('input[type="radio"]').on('click', function() {
+      var $question = $(this).closest('.question');
+  
+      // Disable other options in the same question
+      $question.find('input[type="radio"]').prop('disabled', true);
+  
+      // Determine if the selected answer is correct
+      var selectedValue = $(this).val();
+      var $feedback = $question.find('.feedback');
+  
+      if (selectedValue === 'correct') {
+        $(this).closest('label').addClass('correct-option');
+        $feedback.html('<p class="correct-feedback">Correct!</p>');
+      } else {
+        $(this).closest('label').addClass('incorrect-option');
+        $feedback.html('<p class="incorrect-feedback">Incorrect. The correct answer is marked in green.</p>');
+      }
     });
-
-    $('#submit').click(function () {
-        // Calculate the score
-        var totalQuestions = $('.question').length;
-        var correctAnswers = $('.correct-option').length;
-
-        // Handle the case when all answers are incorrect
-        if (totalQuestions === 0) {
-            var scoreMessage = 'Your score: 0%';
-        } else {
-            var score = (correctAnswers / totalQuestions) * 100;
-            var scoreMessage = 'Your score: ' + score.toFixed(2) + '%';
-        }
-
-        // Display the score to the user
-        $('.feedback').text(scoreMessage);
+  
+    // Event handler for when the "Submit" button is clicked
+    $('#submit').on('click', function() {
+      // Calculate the score for each question
+      var totalQuestions = $('.question').length;
+      var correctAnswers = $('.correct-option').length;
+      var score = (correctAnswers / totalQuestions) * 100;
+  
+      // Display the score in the feedback element
+      $('.feedback').html('<p>Your score: ' + score + '%</p');
+  
+      // Disable the submit button after submitting
+      $(this).prop('disabled', true);
     });
-});
+  
+    // Event handler for when the "Restart" button is clicked
+    $('#restart').on('click', function() {
+      resetQuiz();
+    });
+  });
+  

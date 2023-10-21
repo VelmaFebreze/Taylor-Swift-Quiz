@@ -56,7 +56,7 @@ body {
 }
 
 .correct-option {
-    background-color: #B0D9B1;
+    background-color: green;
     color: black;
 }
 
@@ -75,6 +75,20 @@ body {
     cursor: pointer;
 }
 
+
 #submit:hover {
     background-color: #0056b3;
+}
+
+#restart {
+    background-color: #007bff;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#restart:hover {
+    background-color: #0056b3
 }
